@@ -4,10 +4,23 @@
 UI WIDGET
 ======
 # 使用
+```
+	allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
 
 
+  	dependencies {
+  	        implementation 'com.github.zhanpple:colorPicker:-SNAPSHOT'
+  	}
 
-## 图片显示控件 [ShaderImageView源码](https://github.com/zhanpple/androidUtils/blob/master/widget/src/main/java/com/zmp/widget/shader/ShaderImageView.java)
+```
+
+
+## 图片显示控件 [ShaderImageView源码](https://github.com/zhanpple/colorPicker/tree/master/widget/src/main/java/com/zmp/widget/shader/ShaderImageView.java)
 
 ### 属性
 * <H4>     shape  rectangle 矩形 circle 圆形 star 星形 polygon 多边形
@@ -106,7 +119,7 @@ UI WIDGET
                 });
 ```
 
-## 颜色选择控件 [ColorPickerView源码](https://github.com/zhanpple/androidUtils/blob/master/widget/src/main/java/com/zmp/widget/shader/ColorPickerView.java)
+## 颜色选择控件 [ColorPickerView源码](https://github.com/zhanpple/colorPicker/tree/master/widget/src/main/java/com/zmp/widget/shader/ColorPickerView.java)
 ### 示例图
 ![示例图](https://github.com/zhanpple/androidUtils/blob/master/testFile/ui_pre2.jpg "效果示例图")
 ### 代码使用

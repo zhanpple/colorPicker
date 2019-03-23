@@ -1,0 +1,20 @@
+<resources>
+    <!-- DevideIntoGroupActivity -->
+    <style name="MyDialogStyle" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <!-- 边框 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 半透明 -->
+        <item name="windowNoTitle">true</item>
+        <!-- 无标题 -->
+        <!-- <item name="android:windowBackground">@drawable/bk_dialog</item>自己想要的背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 模糊 -->
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <!--<item name="android:windowSoftInputMode">stateAlwaysVisible</item>&lt;!&ndash;显示软件盘&ndash;&gt;-->
+    </style>
+
+</resources>

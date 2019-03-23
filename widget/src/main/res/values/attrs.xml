@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShaderImageView">
+        <attr name="shape" format="enum">
+            <enum name="rectangle" value="0" />
+            <enum name="circle" value="1" />
+            <enum name="star" value="2" />
+            <enum name="polygon" value="3" />
+        </attr>
+        <attr name="tilMode" format="enum">
+            <enum name="clamp" value="0" />
+            <enum name="repeat" value="1" />
+            <enum name="mirror" value="2" />
+            <enum name="fitXOY" value="3" />
+        </attr>
+        <attr name="padding" format="dimension" />
+        <attr name="radius" format="dimension" />
+        <attr name="src" format="reference" />
+        <attr name="stroke_color" format="color" />
+        <attr name="stroke_size" format="dimension" />
+        <attr name="polygon_num" format="integer" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CircleProgressView">
+        <attr name="cpv_progressColor" format="color" />
+        <attr name="cpv_progressBgColor" format="color" />
+        <attr name="cpv_outBgColor" format="color" />
+        <attr name="cpv_centerBgColor" format="color" />
+        <attr name="cpv_textColor" format="color" />
+        <attr name="cpv_pointBgColor" format="color" />
+        <attr name="cpv_outMode" format="boolean"/>
+        <attr name="cpv_progress" format="integer"/>
+        <attr name="cpv_max" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="HProgressView">
+        <attr name="hp_progressBgColor" format="color" />
+        <attr name="hp_progressStartColor" format="color" />
+        <attr name="hp_progressEndColor" format="color" />
+        <attr name="hp_progress" format="integer" />
+        <attr name="hp_max" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="SportProgressView">
+        <attr name="spv_progressColor" format="color" />
+        <attr name="spv_progressBgColor" format="color" />
+        <attr name="spv_secondProgressColor" format="color" />
+        <attr name="spv_centerBgColor" format="color" />
+        <attr name="spv_textColor" format="color" />
+        <attr name="spv_pointBgColor" format="color" />
+        <attr name="spv_progress" format="integer" />
+        <attr name="spv_max" format="integer"/>
+        <attr name="spv_startAngle" format="float"/>
+        <attr name="spv_progressText" format="string"/>
+    </declare-styleable>
+</resources>

@@ -33,7 +33,7 @@ UI WIDGET
 
 ### 示例图
 
-![示例图](https://github.com/zhanpple/androidUtils/blob/master/testFile/ui_pre.jpg "效果示例图")
+![示例图](https://github.com/zhanpple/Android_Demo/blob/master/testFile/ui_pre.jpg "效果示例图")
 
 ### 用法
 ```xml
@@ -121,7 +121,7 @@ UI WIDGET
 
 ## 颜色选择控件 [ColorPickerView源码](https://github.com/zhanpple/colorPicker/tree/master/widget/src/main/java/com/zmp/widget/shader/ColorPickerView.java)
 ### 示例图
-![示例图](https://github.com/zhanpple/androidUtils/blob/master/testFile/ui_pre2.jpg "效果示例图")
+![示例图](https://github.com/zhanpple/Android_Demo/blob/master/testFile/ui_pre2.jpg "效果示例图")
 ### 代码使用
 ```java
      //Dialog 方式
@@ -146,7 +146,7 @@ UI WIDGET
              }
      }
 ```
-## 工具类 [ANDROID_UTILS](https://github.com/zhanpple/androidUtils/blob/master/README.md)
+## 工具类 [ANDROID_UTILS](https://github.com/zhanpple/Android_Demo/blob/master/README.md)
 
 ## 有任何疑问或建议可随时联系邮箱: zhanpples@qq.com
 

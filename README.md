@@ -18,7 +18,7 @@ UI WIDGET
   	}
 
 ```
-
+* <H3>implementation 'com.github.zhanpple:colorPicker:-SNAPSHOT'</H3>
 
 ## 图片显示控件 [ShaderImageView源码](https://github.com/zhanpple/colorPicker/tree/master/widget/src/main/java/com/zmp/widget/shader/ShaderImageView.java)
 
@@ -146,7 +146,67 @@ UI WIDGET
              }
      }
 ```
-## 工具类 [ANDROID_UTILS](https://github.com/zhanpple/Android_Demo/blob/master/README.md)
+### 示例图
+![示例图](https://github.com/zhanpple/Android_Demo/blob/master/testFile/ui_progress.png "效果示例图")
+### 使用方法
+```xml
+<com.zmp.widget.view.CircleProgressView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:centerBgColor="@color/colorP1"
+        app:outBgColor="@color/colorGuideBlue"
+        app:progressBgColor="@color/colorRed"
+        app:progressColor="@color/colorPrimary"
+        app:textColor="@color/colorWhite"
+        app:pointBgColor="@color/colorAccent"
+        android:background="@color/colorYellow"
+        android:layout_weight="1" />
+
+   <com.zmp.androidutils.CircleChoiceView
+       android:id="@+id/ccv"
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="2"/>
+
+    <com.zmp.widget.view.CircleProgressView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        app:centerBgColor="@color/colorPrimary"
+        app:outBgColor="@color/colorAccent"
+        app:progressBgColor="@color/colorBlue"
+        app:progressColor="@color/colorRed"
+        app:textColor="@color/colorWhite"
+        app:pointBgColor="@color/colorYellow"
+        android:background="@color/colorP1"
+        android:layout_weight="1" />
+
+
+    <com.zmp.widget.view.HProgressView
+        android:id="@+id/hpv"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_margin="20dp"
+        app:progressBgColor="@color/colorAccent"
+        app:progress="0.8"
+        app:progressStartColor="#FF00FF"
+        app:progressEndColor="#00FF00"/>
+
+    <com.zmp.widget.view.CircleProgressView
+        android:id="@+id/cpv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="2"
+        app:centerBgColor="@color/colorAccent"
+        app:outBgColor="@color/colorYellow"
+        app:progressBgColor="@color/colorRed"
+        app:progressColor="@color/colorGuideBlue"
+        app:textColor="@color/colorWhite"
+        app:pointBgColor="@color/colorPrimary"
+        android:background="@color/colorP1" />
+```
 
 ## 有任何疑问或建议可随时联系邮箱: zhanpples@qq.com
 

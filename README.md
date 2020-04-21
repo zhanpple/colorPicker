@@ -147,7 +147,7 @@ UI WIDGET
      }
 ```
 ### 示例图
-![示例图](https://github.com/zhanpple/colorPicker/tree/master/files/ui_pre3s.png "效果示例图")
+![示例图](https://github.com/zhanpple/colorPicker/tree/master/files/ui_pre3.png "效果示例图")
 ### 使用方法
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

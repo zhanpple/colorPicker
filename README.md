@@ -33,7 +33,7 @@ UI WIDGET
 
 ### 示例图
 
-![示例图](https://raw.githubusercontent.com/zhanpple/colorPicker/master/files/ui_pre.png "效果示例图")
+![示例图](https://raw.githubusercontent.com/zhanpple/colorPicker/master/files/ui_pre.jpg "效果示例图")
 
 ### 用法
 ```xml

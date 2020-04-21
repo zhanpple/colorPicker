@@ -147,7 +147,7 @@ UI WIDGET
      }
 ```
 ### 示例图
-![示例图](https://github.com/zhanpple/colorPicker/tree/master/files/ui_progress.png "效果示例图")
+![示例图](https://github.com/zhanpple/colorPicker/tree/master/files/ui_pre3s.png "效果示例图")
 ### 使用方法
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -182,6 +182,7 @@ UI WIDGET
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="1"
+        app:cpv_endMode="pointer"
         android:background="@color/colorP1"
         app:cpv_centerBgColor="@color/colorPrimary"
         app:cpv_outBgColor="@color/colorPrimaryDark"
@@ -199,11 +200,13 @@ UI WIDGET
         android:layout_margin="10dp"
         android:layout_weight="2"
         android:background="@color/colorP1"
-        app:spv_centerBgColor="@color/colorPrimaryDark"
+        app:spv_centerBgColor="@color/colorGray"
         app:spv_max="100"
         app:spv_progress="80"
         app:spv_progressBgColor="@color/colorAccent"
-        app:spv_startAngle="30" />
+        app:spv_maxAngle="240"
+        app:spv_outBgColor="@color/colorBlack"
+        app:spv_startAngle="150" />
 
     <com.zmp.widget.view.CircleProgressView
         android:id="@+id/cpv"
@@ -216,10 +219,12 @@ UI WIDGET
         app:cpv_outBgColor="@color/colorYellow"
         app:cpv_pointBgColor="@color/colorPrimary"
         app:cpv_progress="80"
-        app:cpv_outMode="true"
+        app:cpv_endMode="pointer2"
         app:cpv_text="@string/app_name"
-        app:cpv_progressBgColor="@color/colorRed"
+        app:cpv_progressBgColor="@color/colorGray"
         app:cpv_progressColor="@color/colorGuideBlue"
+        app:cpv_startAngle="150"
+        app:cpv_maxAngle="240"
         app:cpv_textColor="@color/colorWhite" />
 
     <com.zmp.widget.view.HProgressView

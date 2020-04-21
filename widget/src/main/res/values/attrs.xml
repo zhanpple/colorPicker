@@ -29,9 +29,15 @@
         <attr name="cpv_centerBgColor" format="color" />
         <attr name="cpv_textColor" format="color" />
         <attr name="cpv_pointBgColor" format="color" />
-        <attr name="cpv_outMode" format="boolean"/>
+        <attr name="cpv_endMode" format="enum">
+            <enum name="pointer" value="1"/>
+            <enum name="pointer2" value="2"/>
+            <enum name="none" value="3"/>
+        </attr>
         <attr name="cpv_progress" format="integer"/>
         <attr name="cpv_max" format="integer"/>
+        <attr name="cpv_startAngle" format="float"/>
+        <attr name="cpv_maxAngle" format="float"/>
         <attr name="cpv_text" format="string"/>
     </declare-styleable>
 
@@ -50,9 +56,12 @@
         <attr name="spv_centerBgColor" format="color" />
         <attr name="spv_textColor" format="color" />
         <attr name="spv_pointBgColor" format="color" />
+        <attr name="spv_outBgColor" format="color" />
         <attr name="spv_progress" format="integer" />
         <attr name="spv_max" format="integer"/>
         <attr name="spv_startAngle" format="float"/>
+        <attr name="spv_maxAngle" format="float"/>
         <attr name="spv_progressText" format="string"/>
+        <attr name="spv_showPointer" format="boolean"/>
     </declare-styleable>
 </resources>

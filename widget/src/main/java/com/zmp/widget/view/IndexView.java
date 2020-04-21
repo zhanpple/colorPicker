@@ -26,7 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zmp on 2017/10/27.
+ *
+ * @author zmp
+ * @date 2017/10/27
  * IndexView.
  */
 
@@ -253,13 +255,15 @@ public class IndexView extends View {
                         outLocation = new int[2];
                         getLocationInWindow(outLocation);
                         popupWindow = new PopupWindow(inflate, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                        popupWindow.setOutsideTouchable(true); //设置 popupWindow外面可点击
-                        popupWindow.setBackgroundDrawable(new ColorDrawable()); //给popupWindow设置一个背景
+                        //设置 popupWindow外面可点击
+                        popupWindow.setOutsideTouchable(true);
+                        //给popupWindow设置一个背景
+                        popupWindow.setBackgroundDrawable(new ColorDrawable());
                 }
                 textView.setText(strings.get(i));
                 Log.e("OnClick", "outLocation:" + outLocation[0]);
                 popupWindow.showAtLocation(this, Gravity.TOP | Gravity.START, outLocation[0] - popWidth,
-                                           outLocation[1] + padding + textSize / 2 + textSize * i - popHeight / 2);
+                        outLocation[1] + padding + textSize / 2 + textSize * i - popHeight / 2);
                 popupWindow.update();
 
         }
@@ -303,5 +307,7 @@ public class IndexView extends View {
                 void onChoice(int index);
 
                 void onUp(int index, String s);
+
         }
+
 }

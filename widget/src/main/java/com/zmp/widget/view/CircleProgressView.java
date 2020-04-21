@@ -24,6 +24,8 @@ public class CircleProgressView extends View {
 
         private Paint mPaint;
 
+        private Paint mCirclePaint;
+
         private int baseline;
 
         private int measuredWidth;
@@ -35,6 +37,8 @@ public class CircleProgressView extends View {
         private Paint mTextPaint;
 
         private RectF rectF;
+
+        private RectF baseRectF = new RectF();
 
         private Paint mTextPaint2;
 
@@ -63,9 +67,13 @@ public class CircleProgressView extends View {
 
         private int mTextColor;
 
-        private boolean outMode;
+        private int outMode;
 
         private float mStrokeWidth;
+
+        private float mStartAngle = 0;
+
+        private float mMaxAngle = 360;
 
         public int getMax() {
                 return mMax;
@@ -99,9 +107,11 @@ public class CircleProgressView extends View {
                 mOutBgColor = attributes.getColor(R.styleable.CircleProgressView_cpv_outBgColor, Color.BLUE);
                 mCenterBgColor = attributes.getColor(R.styleable.CircleProgressView_cpv_centerBgColor, Color.GRAY);
                 mPointColor = attributes.getColor(R.styleable.CircleProgressView_cpv_pointBgColor, Color.CYAN);
-                outMode = attributes.getBoolean(R.styleable.CircleProgressView_cpv_outMode, false);
+                outMode = attributes.getInt(R.styleable.CircleProgressView_cpv_endMode, 3);
                 mProgress = attributes.getInteger(R.styleable.CircleProgressView_cpv_progress, 0);
                 mMax = attributes.getInteger(R.styleable.CircleProgressView_cpv_max, 100);
+                mStartAngle = attributes.getFloat(R.styleable.CircleProgressView_cpv_startAngle, 0F);
+                mMaxAngle = attributes.getFloat(R.styleable.CircleProgressView_cpv_maxAngle, 360F);
                 mProgressText = attributes.getString(R.styleable.CircleProgressView_cpv_text);
                 attributes.recycle();
         }
@@ -109,6 +119,10 @@ public class CircleProgressView extends View {
         private void init() {
                 mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 mPaint.setStyle(Paint.Style.STROKE);
+
+                mCirclePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+                mCirclePaint.setStyle(Paint.Style.FILL);
+
                 mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
                 mTextPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
                 mPointPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -182,29 +196,48 @@ public class CircleProgressView extends View {
         @Override
         protected void onDraw(Canvas canvas) {
                 super.onDraw(canvas);
-                mPaint.setColor(mOutBgColor);
-                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, maxR - cR * 0.125F, mPaint);
-                mPointPaint.setColor(mCenterBgColor);
-                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR, mPointPaint);
-                mPaint.setColor(mProgressBgColor);
-                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR, mPaint);
-                mPaint.setColor(mProgressColor);
-                canvas.drawArc(rectF, -90F, mProgress * 360 / mMax, false, mPaint);
-                canvas.save();
-                mPath.reset();
-                if (outMode) {
-                        mPath.moveTo(measuredWidth / 2 + maxR, measuredHeight / 2);
-                } else {
-                        mPath.moveTo(measuredWidth / 2F + cR + mStrokeWidth / 2, measuredHeight / 2);
-                }
-                mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F + cR * 0.1F);
-                mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F - cR * 0.1F);
-                mPath.close();
-                mPointPaint.setColor(mPointColor);
-                canvas.rotate(mProgress * 360F / mMax - 90, measuredWidth / 2, measuredHeight / 2);
-                canvas.drawPath(mPath, mPointPaint);
+                mCirclePaint.setColor(mOutBgColor);
+                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR + mStrokeWidth / 2, mCirclePaint);
 
-                canvas.restore();
+                mPointPaint.setColor(mCenterBgColor);
+                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR - mStrokeWidth / 2, mPointPaint);
+
+                mPaint.setColor(mProgressBgColor);
+                baseRectF.set(measuredWidth / 2F - cR, measuredHeight / 2F - cR, measuredWidth / 2F + cR, measuredHeight / 2F + cR);
+                canvas.drawArc(baseRectF, mStartAngle, mMaxAngle, false, mPaint);
+                float sin = (float) Math.sin(mStartAngle * Math.PI / 180);
+                float cos = (float) Math.cos(mStartAngle * Math.PI / 180);
+                float sin2 = (float) Math.sin((mStartAngle + mMaxAngle) * Math.PI / 180);
+                float cos2 = (float) Math.cos((mStartAngle + mMaxAngle) * Math.PI / 180);
+                float sin3 = (float) Math.sin((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
+                float cos3 = (float) Math.cos((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
+                mCirclePaint.setColor(mProgressBgColor);
+                canvas.drawCircle(measuredWidth / 2F + cR * cos2, measuredHeight / 2F + cR * sin2, mStrokeWidth / 2, mCirclePaint);
+
+                mPaint.setColor(mProgressColor);
+                mCirclePaint.setColor(mProgressColor);
+                canvas.drawArc(rectF, mStartAngle, mProgress * mMaxAngle / mMax, false, mPaint);
+                canvas.drawCircle(measuredWidth / 2F + cR * cos, measuredHeight / 2F + cR * sin, mStrokeWidth / 2, mCirclePaint);
+
+                if (outMode == 3) {
+                        canvas.drawCircle(measuredWidth / 2F + cR * cos3, measuredHeight / 2F + cR * sin3, mStrokeWidth / 2, mCirclePaint);
+                } else {
+                        canvas.save();
+                        mPath.reset();
+                        if (outMode == 1) {
+                                mPath.moveTo(measuredWidth / 2 + maxR, measuredHeight / 2);
+                        } else if (outMode == 2) {
+                                mPath.moveTo(measuredWidth / 2F + cR + mStrokeWidth / 2, measuredHeight / 2);
+                        }
+                        mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F + cR * 0.1F);
+                        mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F - cR * 0.1F);
+                        mPath.close();
+                        mPointPaint.setColor(mPointColor);
+                        canvas.rotate(mProgress * mMaxAngle / mMax + mStartAngle, measuredWidth / 2, measuredHeight / 2);
+                        canvas.drawPath(mPath, mPointPaint);
+                        canvas.restore();
+                }
+
                 canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2F - baseline - cR * 0.2F, mTextPaint);
                 if (!TextUtils.isEmpty(mProgressText)) {
                         canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2F - baseline2 + cR * 0.2F, mTextPaint2);

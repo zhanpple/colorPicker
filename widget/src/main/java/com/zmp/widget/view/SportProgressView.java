@@ -7,7 +7,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
+
 import androidx.annotation.Nullable;
+
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -38,6 +40,12 @@ public class SportProgressView extends View {
         private Paint mTextPaint2;
 
         private int baseline2;
+
+        private float mMaxAngle;
+
+        private int mOutBgColor;
+
+        private boolean mShowPointer;
 
 
         public int getProgress() {
@@ -96,13 +104,16 @@ public class SportProgressView extends View {
                 mProgressBgColor = attributes.getColor(R.styleable.SportProgressView_spv_progressBgColor, Color.MAGENTA);
                 mTextColor = attributes.getColor(R.styleable.SportProgressView_spv_textColor, Color.WHITE);
                 mSecondProgressColor = attributes.getColor(R.styleable.SportProgressView_spv_secondProgressColor, Color.BLUE);
+                mOutBgColor = attributes.getColor(R.styleable.SportProgressView_spv_outBgColor, Color.BLUE);
                 mCenterBgColor = attributes.getColor(R.styleable.SportProgressView_spv_centerBgColor, Color.GRAY);
                 mPointColor = attributes.getColor(R.styleable.SportProgressView_spv_pointBgColor, Color.CYAN);
                 mProgress = attributes.getInteger(R.styleable.SportProgressView_spv_progress, 0);
                 mMax = attributes.getInteger(R.styleable.SportProgressView_spv_max, 100);
                 mStartAngle = attributes.getFloat(R.styleable.SportProgressView_spv_startAngle, -90F);
+                mMaxAngle = attributes.getFloat(R.styleable.SportProgressView_spv_maxAngle, 360F);
+                mShowPointer = attributes.getBoolean(R.styleable.SportProgressView_spv_showPointer, true);
                 String p = attributes.getString(R.styleable.SportProgressView_spv_progressText);
-                if (!TextUtils.isEmpty(p)){
+                if (!TextUtils.isEmpty(p)) {
                         mProgressText = p;
                 }
                 attributes.recycle();
@@ -125,21 +136,21 @@ public class SportProgressView extends View {
                 measuredWidth = getMeasuredWidth();
                 measuredHeight = getMeasuredHeight();
                 int maxR = Math.min(measuredWidth, measuredHeight) / 2;
-                strokeW = maxR * 0.13F;
+                strokeW = maxR * 0.2F;
                 cR = maxR - strokeW / 2;
                 mPaint.setStrokeWidth(strokeW);
                 mTextPaint.setTextSize(cR * 0.6F);
                 mTextPaint.setTextAlign(Paint.Align.CENTER);
                 Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
                 baseline = (fontMetrics.bottom + fontMetrics.top) / 2;
-                rectF = new RectF(measuredWidth / 2 - cR, measuredHeight / 2 - cR, measuredWidth / 2 + cR, measuredHeight / 2 + cR);
-                rectF2 = new RectF(measuredWidth / 2 - cR + strokeW, measuredHeight / 2 - cR + strokeW, measuredWidth / 2 + cR - strokeW,
-                                   measuredHeight / 2 + cR - strokeW);
+                rectF = new RectF(measuredWidth / 2F - cR, measuredHeight / 2F - cR, measuredWidth / 2F + cR, measuredHeight / 2F + cR);
+                rectF2 = new RectF(measuredWidth / 2F - cR + strokeW * 3 / 4, measuredHeight / 2F - cR + strokeW * 3 / 4, measuredWidth / 2F + cR - strokeW * 3 / 4,
+                        measuredHeight / 2F + cR - strokeW * 3 / 4);
                 maxRect = new RectF(measuredWidth / 2 - maxR, measuredHeight / 2 - maxR, measuredWidth / 2 + maxR, measuredHeight / 2 + maxR);
                 mTextPaint2.setTextSize(cR * 0.3F);
                 mTextPaint2.setTextAlign(Paint.Align.CENTER);
                 Paint.FontMetricsInt fontMetrics2 = mTextPaint2.getFontMetricsInt();
-                baseline2 = (fontMetrics.bottom + fontMetrics.top) / 2;
+                baseline2 = (fontMetrics2.bottom + fontMetrics2.top) / 2;
         }
 
         public void setProgressColor(int progressColor) {
@@ -199,24 +210,50 @@ public class SportProgressView extends View {
         @Override
         protected void onDraw(Canvas canvas) {
                 super.onDraw(canvas);
+                mPointPaint.setColor(mOutBgColor);
+                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR + strokeW / 2, mPointPaint);
                 mPointPaint.setColor(mCenterBgColor);
                 canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR - strokeW / 2, mPointPaint);
+
+                float sin = (float) Math.sin(mStartAngle * Math.PI / 180);
+                float cos = (float) Math.cos(mStartAngle * Math.PI / 180);
+                float sin2 = (float) Math.sin((mStartAngle + mMaxAngle) * Math.PI / 180);
+                float cos2 = (float) Math.cos((mStartAngle + mMaxAngle) * Math.PI / 180);
+                float sin3 = (float) Math.sin((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
+                float cos3 = (float) Math.cos((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
                 mPaint.setColor(mProgressBgColor);
-                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR, mPaint);
+                mPointPaint.setColor(mProgressBgColor);
+                canvas.drawArc(rectF, mStartAngle, mMaxAngle, false, mPaint);
+                canvas.drawCircle(measuredWidth / 2F + cR * cos2, measuredHeight / 2F + cR * sin2, strokeW / 2, mPointPaint);
+
                 mPaint.setColor(mProgressColor);
-                canvas.drawArc(rectF, mStartAngle, mProgress * 360F / mMax, false, mPaint);
+                mPointPaint.setColor(mProgressColor);
+                canvas.drawArc(rectF, mStartAngle, mProgress * mMaxAngle / mMax, false, mPaint);
+                canvas.drawCircle(measuredWidth / 2F + cR * cos, measuredHeight / 2F + cR * sin, strokeW / 2, mPointPaint);
+
                 mPaint.setColor(mSecondProgressColor);
-                canvas.drawArc(rectF2, mStartAngle, mProgress * 360F / mMax, false, mPaint);
-                canvas.save();
-                mPath.reset();
-                mPath.moveTo(measuredWidth / 2 + cR * 0.5F, measuredHeight / 2);
-                mPath.arcTo(maxRect, -2, 4F);
-                mPath.close();
-                mPointPaint.setColor(mPointColor);
-                canvas.rotate(mProgress * 360F / mMax + mStartAngle, measuredWidth / 2, measuredHeight / 2);
-                canvas.drawPath(mPath, mPointPaint);
-                canvas.restore();
+                mPointPaint.setColor(mSecondProgressColor);
+                mPaint.setStrokeWidth(strokeW / 2);
+                canvas.drawCircle(measuredWidth / 2F + (cR - strokeW * 3 / 4) * cos, measuredHeight / 2F + (cR - strokeW * 3 / 4) * sin, strokeW / 4, mPointPaint);
+                canvas.drawArc(rectF2, mStartAngle, mProgress * mMaxAngle / mMax, false, mPaint);
+                if (!mShowPointer) {
+                        mPointPaint.setColor(mProgressColor);
+                        canvas.drawCircle(measuredWidth / 2F + cR * cos3, measuredHeight / 2F + cR * sin3, strokeW / 2, mPointPaint);
+                        mPointPaint.setColor(mSecondProgressColor);
+                        canvas.drawCircle(measuredWidth / 2F + (cR - strokeW * 3 / 4) * cos3, measuredHeight / 2F + (cR - strokeW * 3 / 4) * sin3, strokeW / 4, mPointPaint);
+                } else {
+                        canvas.save();
+                        mPath.reset();
+                        mPath.moveTo(measuredWidth / 2F + cR * 0.5F, measuredHeight / 2);
+                        mPath.arcTo(maxRect, -2, 4F);
+                        mPath.close();
+                        mPointPaint.setColor(mPointColor);
+                        canvas.rotate(mProgress * mMaxAngle / mMax + mStartAngle, measuredWidth / 2, measuredHeight / 2);
+                        canvas.drawPath(mPath, mPointPaint);
+                        canvas.restore();
+                }
                 canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2 - baseline, mTextPaint);
-                canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2 - baseline2 + cR * 0.3F, mTextPaint2);
+                canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2F - baseline2 + cR * 0.4F, mTextPaint2);
         }
+
 }

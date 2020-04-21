@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
+
+
 android {
     compileSdkVersion 28
-
 
 
     defaultConfig {
@@ -25,20 +25,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha03'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     testImplementation 'junit:junit:4.12'
-    implementation 'com.google.code.gson:gson:2.8.4'
-    androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0-alpha02'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
-
-////上传到JCenter
-//publish {
-//    repoName = 'apple'
-//    userOrg = 'zhanpple'
-//    groupId = 'com.zmp.zhanpple'
-//    artifactId = 'widget'
-//    publishVersion = '2.0.3'
-//    desc = 'Super duper easy way to release your Android and other artifacts to bintray'
-//    website = "https://github.com/zhanpple/androidUtils"
-//}

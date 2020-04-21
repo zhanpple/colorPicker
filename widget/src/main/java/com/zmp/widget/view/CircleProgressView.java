@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import androidx.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import com.zmp.widget.R;
 
@@ -100,6 +102,7 @@ public class CircleProgressView extends View {
                 outMode = attributes.getBoolean(R.styleable.CircleProgressView_cpv_outMode, false);
                 mProgress = attributes.getInteger(R.styleable.CircleProgressView_cpv_progress, 0);
                 mMax = attributes.getInteger(R.styleable.CircleProgressView_cpv_max, 100);
+                mProgressText = attributes.getString(R.styleable.CircleProgressView_cpv_text);
                 attributes.recycle();
         }
 
@@ -127,11 +130,11 @@ public class CircleProgressView extends View {
                 mTextPaint.setTextAlign(Paint.Align.CENTER);
                 Paint.FontMetricsInt fontMetrics = mTextPaint.getFontMetricsInt();
                 baseline = (fontMetrics.bottom + fontMetrics.top) / 2;
-                rectF = new RectF(measuredWidth / 2 - cR, measuredHeight / 2 - cR, measuredWidth / 2 + cR, measuredHeight / 2 + cR);
+                rectF = new RectF(measuredWidth / 2F - cR, measuredHeight / 2F - cR, measuredWidth / 2F + cR, measuredHeight / 2F + cR);
                 mTextPaint2.setTextSize(mStrokeWidth);
                 mTextPaint2.setTextAlign(Paint.Align.CENTER);
                 Paint.FontMetricsInt fontMetrics2 = mTextPaint2.getFontMetricsInt();
-                baseline2 = (fontMetrics.bottom + fontMetrics.top) / 2;
+                baseline2 = (fontMetrics2.bottom + fontMetrics2.top) / 2;
         }
 
         public void setColor(int progressColor) {
@@ -186,25 +189,26 @@ public class CircleProgressView extends View {
                 mPaint.setColor(mProgressBgColor);
                 canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR, mPaint);
                 mPaint.setColor(mProgressColor);
-                canvas.drawArc(rectF, -90F, mProgress * 360/mMax, false, mPaint);
+                canvas.drawArc(rectF, -90F, mProgress * 360 / mMax, false, mPaint);
                 canvas.save();
                 mPath.reset();
                 if (outMode) {
                         mPath.moveTo(measuredWidth / 2 + maxR, measuredHeight / 2);
+                } else {
+                        mPath.moveTo(measuredWidth / 2F + cR + mStrokeWidth / 2, measuredHeight / 2);
                 }
-                else {
-                        mPath.moveTo(measuredWidth / 2 + cR + mStrokeWidth / 2, measuredHeight / 2);
-                }
-                mPath.lineTo(measuredWidth / 2 + cR * 0.8F, measuredHeight / 2 + cR * 0.1F);
-                mPath.lineTo(measuredWidth / 2 + cR * 0.8F, measuredHeight / 2 - cR * 0.1F);
+                mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F + cR * 0.1F);
+                mPath.lineTo(measuredWidth / 2F + cR * 0.8F, measuredHeight / 2F - cR * 0.1F);
                 mPath.close();
                 mPointPaint.setColor(mPointColor);
-                canvas.rotate(mProgress * 360F/mMax - 90, measuredWidth / 2, measuredHeight / 2);
+                canvas.rotate(mProgress * 360F / mMax - 90, measuredWidth / 2, measuredHeight / 2);
                 canvas.drawPath(mPath, mPointPaint);
-                //                mPointPaint.setColor(Color.BLACK);
-                //                canvas.drawCircle(measuredWidth / 2, measuredHeight / 2, cR * 0.05F, mPointPaint);
+
                 canvas.restore();
-                canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2 - baseline - cR * 0.2F, mTextPaint);
-                canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2 - baseline2 + cR * 0.2F, mTextPaint2);
+                canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2F - baseline - cR * 0.2F, mTextPaint);
+                if (!TextUtils.isEmpty(mProgressText)) {
+                        canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2F - baseline2 + cR * 0.2F, mTextPaint2);
+                }
         }
+
 }

@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zmp on 2018/6/21.
+ *
+ * @author zmp
+ * @date 2018/6/21
  */
 
 public class ColorPickerDialog extends Dialog implements View.OnClickListener {

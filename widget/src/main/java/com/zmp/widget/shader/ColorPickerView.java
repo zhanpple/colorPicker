@@ -10,13 +10,16 @@ import android.graphics.PorterDuff;
 import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
 /**
- * Created by zmp on 2018/6/20.
+ * @author zmp
+ * @date 2018/6/20
  */
 
 public class ColorPickerView extends View {
@@ -71,14 +74,13 @@ public class ColorPickerView extends View {
         public boolean onTouchEvent(MotionEvent event) {
                 switch (event.getAction()) {
                         case MotionEvent.ACTION_DOWN:
-                                getColor(event);
-                                break;
                         case MotionEvent.ACTION_MOVE:
                                 getColor(event);
                                 break;
                         case MotionEvent.ACTION_UP:
                                 performClick();
                                 break;
+                        default:
 
                 }
                 return true;
@@ -102,18 +104,18 @@ public class ColorPickerView extends View {
                         return;
                 }
                 SweepGradient mSweepGradient = new SweepGradient(measuredWidth / 2, measuredHeight / 2,
-                                                                 new int[]{
-                                                                         getCurrentColor(scale, 0x00000000, 0xFF00FFFF, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFF0000FF, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFFFF00FF, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFFFF0000, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFFFFFF00, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFF00FF00, getAlpha()),
-                                                                         getCurrentColor(scale, 0x00000000, 0xFF00FFFF, getAlpha()),
-                                                                         },
-                                                                 null);
+                        new int[]{
+                                getCurrentColor(scale, 0x00000000, 0xFF00FFFF, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFF0000FF, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFFFF00FF, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFFFF0000, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFFFFFF00, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFF00FF00, getAlpha()),
+                                getCurrentColor(scale, 0x00000000, 0xFF00FFFF, getAlpha()),
+                        },
+                        null);
                 RadialGradient radialGradient = new RadialGradient(measuredWidth / 2, measuredHeight / 2,
-                                                                   radius, 0xFFFFFFFF, 0x00FFFFFF, Shader.TileMode.CLAMP);
+                        radius, 0xFFFFFFFF, 0x00FFFFFF, Shader.TileMode.CLAMP);
                 ComposeShader composeShader = new ComposeShader(mSweepGradient, radialGradient, PorterDuff.Mode.SRC_OVER);
                 mPaint.setShader(composeShader);
                 mBitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888);
@@ -124,7 +126,7 @@ public class ColorPickerView extends View {
 
         @Override
         public void setAlpha(float alpha) {
-                this.mAlpha =alpha;
+                this.mAlpha = alpha;
                 setColorPercent(colorPercent);
         }
 
@@ -150,11 +152,11 @@ public class ColorPickerView extends View {
                 String b1 = Integer.toHexString(b);
                 String a1 = Integer.toHexString(a);
                 String text = String.format("%1$s%2$s%3$s%4$s",
-                                            a1.length() == 2 ? a1 : ("0" + a1),
-                                            r1.length() == 2 ? r1 : ("0" + r1),
-                                            g1.length() == 2 ? g1 : ("0" + g1),
-                                            b1.length() == 2 ? b1 : ("0" + b1)
-                                           ).toUpperCase();
+                        a1.length() == 2 ? a1 : ("0" + a1),
+                        r1.length() == 2 ? r1 : ("0" + r1),
+                        g1.length() == 2 ? g1 : ("0" + g1),
+                        b1.length() == 2 ? b1 : ("0" + b1)
+                ).toUpperCase();
                 if (choiceColorListener != null) {
                         choiceColorListener.onChoiceColor(color, a1, r, g, b, text);
                 }
@@ -169,6 +171,7 @@ public class ColorPickerView extends View {
         public interface IChoiceColorListener {
 
                 void onChoiceColor(int color, String a1, int r, int g, int b, String text);
+
         }
 
         private boolean checkXY(float x, float y) {
@@ -205,4 +208,5 @@ public class ColorPickerView extends View {
 
                 return Color.argb(alphaCurrent, redCurrent, greenCurrent, blueCurrent);
         }
+
 }

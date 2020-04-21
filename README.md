@@ -150,48 +150,60 @@ UI WIDGET
 ![示例图](https://github.com/zhanpple/Android_Demo/blob/master/testFile/ui_progress.png "效果示例图")
 ### 使用方法
 ```xml
-<com.zmp.widget.view.CircleProgressView
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zmp.widget.view.CircleChoiceView
+        android:id="@+id/ccv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
-        app:centerBgColor="@color/colorP1"
-        app:outBgColor="@color/colorGuideBlue"
-        app:progressBgColor="@color/colorRed"
-        app:progressColor="@color/colorPrimary"
-        app:textColor="@color/colorWhite"
-        app:pointBgColor="@color/colorAccent"
-        android:background="@color/colorYellow"
         android:layout_weight="1" />
-
-   <com.zmp.androidutils.CircleChoiceView
-       android:id="@+id/ccv"
-       android:layout_width="match_parent"
-       android:layout_height="0dp"
-       android:layout_weight="2"/>
 
     <com.zmp.widget.view.CircleProgressView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        app:centerBgColor="@color/colorPrimary"
-        app:outBgColor="@color/colorAccent"
-        app:progressBgColor="@color/colorBlue"
-        app:progressColor="@color/colorRed"
-        app:textColor="@color/colorWhite"
-        app:pointBgColor="@color/colorYellow"
-        android:background="@color/colorP1"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:background="@color/colorYellow"
+        app:cpv_centerBgColor="@color/colorP1"
+        app:cpv_outBgColor="@color/colorGuideBlue"
+        app:cpv_pointBgColor="@color/colorAccent"
+        app:cpv_progress="80"
+        app:cpv_progressBgColor="@color/colorBlue"
+        app:cpv_progressColor="@color/colorPrimary"
+        app:cpv_textColor="@color/colorWhite" />
 
-
-    <com.zmp.widget.view.HProgressView
-        android:id="@+id/hpv"
+    <com.zmp.widget.view.CircleProgressView
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_margin="20dp"
-        app:progressBgColor="@color/colorAccent"
-        app:progress="0.8"
-        app:progressStartColor="#FF00FF"
-        app:progressEndColor="#00FF00"/>
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@color/colorP1"
+        app:cpv_centerBgColor="@color/colorPrimary"
+        app:cpv_outBgColor="@color/colorPrimaryDark"
+        app:cpv_pointBgColor="@color/colorYellow"
+        app:cpv_progress="80"
+        app:cpv_progressBgColor="@color/colorBlue"
+        app:cpv_progressColor="@color/colorRed"
+        app:cpv_textColor="@color/colorWhite" />
+
+
+    <com.zmp.widget.view.SportProgressView
+        android:id="@+id/spv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:layout_weight="2"
+        android:background="@color/colorP1"
+        app:spv_centerBgColor="@color/colorPrimaryDark"
+        app:spv_max="100"
+        app:spv_progress="80"
+        app:spv_progressBgColor="@color/colorAccent"
+        app:spv_startAngle="30" />
 
     <com.zmp.widget.view.CircleProgressView
         android:id="@+id/cpv"
@@ -199,13 +211,29 @@ UI WIDGET
         android:layout_height="0dp"
         android:layout_margin="10dp"
         android:layout_weight="2"
-        app:centerBgColor="@color/colorAccent"
-        app:outBgColor="@color/colorYellow"
-        app:progressBgColor="@color/colorRed"
-        app:progressColor="@color/colorGuideBlue"
-        app:textColor="@color/colorWhite"
-        app:pointBgColor="@color/colorPrimary"
-        android:background="@color/colorP1" />
+        android:background="@color/colorP1"
+        app:cpv_centerBgColor="@color/colorAccent"
+        app:cpv_outBgColor="@color/colorYellow"
+        app:cpv_pointBgColor="@color/colorPrimary"
+        app:cpv_progress="80"
+        app:cpv_outMode="true"
+        app:cpv_text="@string/app_name"
+        app:cpv_progressBgColor="@color/colorRed"
+        app:cpv_progressColor="@color/colorGuideBlue"
+        app:cpv_textColor="@color/colorWhite" />
+
+    <com.zmp.widget.view.HProgressView
+        android:id="@+id/hpv"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_margin="20dp"
+        app:hp_progress="80"
+        app:hp_progressBgColor="@color/colorAccent"
+        app:hp_progressEndColor="#00FF00"
+        app:hp_progressStartColor="#FF00FF" />
+
+
+</LinearLayout>
 ```
 
 ## 有任何疑问或建议可随时联系邮箱: zhanpples@qq.com

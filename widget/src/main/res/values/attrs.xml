@@ -32,6 +32,7 @@
         <attr name="cpv_outMode" format="boolean"/>
         <attr name="cpv_progress" format="integer"/>
         <attr name="cpv_max" format="integer"/>
+        <attr name="cpv_text" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="HProgressView">

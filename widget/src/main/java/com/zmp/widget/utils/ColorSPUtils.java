@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 import java.util.Map;
 
+/**
+ * @author zmp
+ */
 public class ColorSPUtils {
 
         /**

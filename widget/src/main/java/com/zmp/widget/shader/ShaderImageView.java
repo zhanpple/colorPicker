@@ -17,7 +17,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+
 import androidx.annotation.Nullable;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -95,10 +97,6 @@ public class ShaderImageView extends View {
                 shapeMode = attributes.getInt(R.styleable.ShaderImageView_shape, 0);
                 int tilMode = attributes.getInt(R.styleable.ShaderImageView_tilMode, 0);
                 switch (tilMode) {
-                        case 0:
-                                shaderMode = Shader.TileMode.CLAMP;
-                                break;
-
                         case 1:
                                 shaderMode = Shader.TileMode.REPEAT;
                                 break;
@@ -203,7 +201,8 @@ public class ShaderImageView extends View {
                         return;
                 }
                 switch (shapeMode) {
-                        case 0://矩形
+                        case 0:
+                                //矩形
                                 rectF.left = padding + strokeSize;
                                 rectF.right = measuredWidth - padding - strokeSize;
                                 rectF.top = padding + strokeSize;
@@ -211,14 +210,17 @@ public class ShaderImageView extends View {
                                 canvas.drawRoundRect(rectF, radius, radius, mPaint);
                                 canvas.drawRoundRect(rectF, radius, radius, mColorPaint);
                                 break;
-                        case 1://圆
+                        case 1:
+                                //圆
                                 canvas.drawCircle(centerX, centerY, shaderR, mPaint);
                                 canvas.drawCircle(centerX, centerY, shaderR + strokeSize / 2, mColorPaint);
                                 break;
-                        case 2://正角星
+                        case 2:
+                                //正角星
                                 drawMultiStar(canvas);
                                 break;
-                        case 3://正多边形
+                        case 3:
+                                //正多边形
                                 drawPolygon(canvas);
                                 break;
                         default:
@@ -362,6 +364,7 @@ public class ShaderImageView extends View {
                                 setPressed(false);
                                 performClick();
                                 break;
+                        default:
                 }
                 return super.onTouchEvent(event);
         }
@@ -377,4 +380,5 @@ public class ShaderImageView extends View {
                 super.drawableStateChanged();
                 setShader();
         }
+
 }

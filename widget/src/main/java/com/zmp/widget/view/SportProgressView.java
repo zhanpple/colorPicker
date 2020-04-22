@@ -221,6 +221,7 @@ public class SportProgressView extends View {
                 float cos2 = (float) Math.cos((mStartAngle + mMaxAngle) * Math.PI / 180);
                 float sin3 = (float) Math.sin((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
                 float cos3 = (float) Math.cos((mStartAngle + mProgress * mMaxAngle / mMax) * Math.PI / 180);
+                mPaint.setStrokeWidth(strokeW);
                 mPaint.setColor(mProgressBgColor);
                 mPointPaint.setColor(mProgressBgColor);
                 canvas.drawArc(rectF, mStartAngle, mMaxAngle, false, mPaint);

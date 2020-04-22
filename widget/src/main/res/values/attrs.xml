@@ -64,4 +64,16 @@
         <attr name="spv_progressText" format="string"/>
         <attr name="spv_showPointer" format="boolean"/>
     </declare-styleable>
+
+
+    <declare-styleable name="SimpleCircleProgress">
+        <attr name="scp_progressColor" format="color" />
+        <attr name="scp_progressBgColor" format="color" />
+        <attr name="scp_textColor" format="color" />
+        <attr name="scp_startAngle" format="float"/>
+        <attr name="scp_maxAngle" format="float"/>
+        <attr name="scp_progressWidthPercent" format="float"/>
+        <attr name="scp_textMarginTop" format="float"/>
+        <attr name="scp_progressText" format="string"/>
+    </declare-styleable>
 </resources>

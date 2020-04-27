@@ -88,7 +88,7 @@ public class SimpleCircleProgress extends View {
                 super.onSizeChanged(w, h, oldw, oldh);
                 mCenterWidth = getMeasuredWidth() / 2;
                 mCenterHeight = getMeasuredHeight() / 2;
-                mOutR = Math.min(mCenterWidth, mCenterHeight) * 0.8F;
+                mOutR = Math.min(mCenterWidth, mCenterHeight) * 0.95F;
                 mInR = mOutR * 0.9F * mProgressWidthPercent;
                 mRectF = new RectF(mCenterWidth - mOutR, mCenterHeight - mOutR, mCenterWidth + mOutR, mCenterHeight + mOutR);
                 mRectF2 = new RectF(mCenterWidth - mInR, mCenterHeight - mInR, mCenterWidth + mInR, mCenterHeight + mInR);

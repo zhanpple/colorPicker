@@ -39,6 +39,7 @@
         <attr name="cpv_startAngle" format="float"/>
         <attr name="cpv_maxAngle" format="float"/>
         <attr name="cpv_text" format="string"/>
+        <attr name="cpv_text_marginTopPercent" format="float"/>
     </declare-styleable>
 
     <declare-styleable name="HProgressView">

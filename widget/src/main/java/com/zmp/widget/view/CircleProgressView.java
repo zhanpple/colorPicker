@@ -75,6 +75,8 @@ public class CircleProgressView extends View {
 
         private float mMaxAngle = 360;
 
+        private float marginTopPercent = 0;
+
         public int getMax() {
                 return mMax;
         }
@@ -113,6 +115,7 @@ public class CircleProgressView extends View {
                 mStartAngle = attributes.getFloat(R.styleable.CircleProgressView_cpv_startAngle, 0F);
                 mMaxAngle = attributes.getFloat(R.styleable.CircleProgressView_cpv_maxAngle, 360F);
                 mProgressText = attributes.getString(R.styleable.CircleProgressView_cpv_text);
+                marginTopPercent = attributes.getFloat(R.styleable.CircleProgressView_cpv_text_marginTopPercent, 0);
                 attributes.recycle();
         }
 
@@ -238,9 +241,9 @@ public class CircleProgressView extends View {
                         canvas.restore();
                 }
 
-                canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2F - baseline - cR * 0.2F, mTextPaint);
+                canvas.drawText(String.valueOf(mProgress), measuredWidth / 2, measuredHeight / 2F - baseline - cR * 0.2F + cR * marginTopPercent, mTextPaint);
                 if (!TextUtils.isEmpty(mProgressText)) {
-                        canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2F - baseline2 + cR * 0.2F, mTextPaint2);
+                        canvas.drawText(mProgressText, measuredWidth / 2, measuredHeight / 2F - baseline2 + cR * 0.2F + cR * marginTopPercent, mTextPaint2);
                 }
         }
 

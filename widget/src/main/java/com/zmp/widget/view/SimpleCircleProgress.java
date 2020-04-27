@@ -192,12 +192,12 @@ public class SimpleCircleProgress extends View {
                 }
 
                 mPaint.setColor(mTextColor);
-                mPaint.setTextSize(mInR * 0.4F);
+                mPaint.setTextSize(mInR * 0.5F);
                 String text = isIntMode ? Math.round(mProgress) + "%" : mProgress + "%";
                 canvas.drawText(text, mCenterWidth, mCenterHeight + (mInR * mTextMarginTop), mPaint);
                 if (!TextUtils.isEmpty(mText)) {
-                        mPaint.setTextSize(mInR * 0.2F);
-                        canvas.drawText(mText, mCenterWidth, mCenterHeight + mInR * (0.3F + mTextMarginTop), mPaint);
+                        mPaint.setTextSize(mInR * 0.4F);
+                        canvas.drawText(mText, mCenterWidth, mCenterHeight + mInR * (0.4F + mTextMarginTop), mPaint);
                 }
         }
 

@@ -24,8 +24,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-//    implementation project(path: ':widget')
+    implementation project(path: ':widget')
     //noinspection GradleDependency
-    implementation 'com.github.zhanpple:colorPicker:5204860dd8'
+//    implementation 'com.github.zhanpple:colorPicker:5204860dd8'
 }
 

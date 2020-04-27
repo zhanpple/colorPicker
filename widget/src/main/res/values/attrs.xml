@@ -76,5 +76,7 @@
         <attr name="scp_progressWidthPercent" format="float"/>
         <attr name="scp_textMarginTop" format="float"/>
         <attr name="scp_progressText" format="string"/>
+        <attr name="scp_progress" format="float"/>
+        <attr name="scp_progress_int" format="boolean"/>
     </declare-styleable>
 </resources>

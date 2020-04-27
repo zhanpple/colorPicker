@@ -43,6 +43,8 @@ public class SimpleCircleProgress extends View {
 
         private int[] mProgressColors;
 
+        private boolean isIntMode = false;
+
         public SimpleCircleProgress(Context context) {
                 this(context, null);
         }
@@ -64,9 +66,11 @@ public class SimpleCircleProgress extends View {
                 mTextColor = attributes.getColor(R.styleable.SimpleCircleProgress_scp_textColor, Color.BLACK);
                 mStartAngle = attributes.getFloat(R.styleable.SimpleCircleProgress_scp_startAngle, 0);
                 mSweepAngle = attributes.getFloat(R.styleable.SimpleCircleProgress_scp_maxAngle, 360);
+                mProgress = attributes.getFloat(R.styleable.SimpleCircleProgress_scp_progress, 0);
                 mText = attributes.getString(R.styleable.SimpleCircleProgress_scp_progressText);
                 mTextMarginTop = attributes.getFloat(R.styleable.SimpleCircleProgress_scp_textMarginTop, 0);
                 mProgressWidthPercent = attributes.getFloat(R.styleable.SimpleCircleProgress_scp_progressWidthPercent, 1);
+                isIntMode = attributes.getBoolean(R.styleable.SimpleCircleProgress_scp_progress_int, false);
                 attributes.recycle();
         }
 
@@ -177,9 +181,10 @@ public class SimpleCircleProgress extends View {
                 mPaint.setColor(mProgressBg);
                 canvas.drawPath(mPath, mPaint);
 
-                calculationPath(mStartAngle, mSweepAngle * 0.8F);
+                calculationPath(mStartAngle, mSweepAngle * mProgress / 100F);
                 if (mSweepGradient == null) {
                         mPaint.setColor(mProgressColor);
+                        canvas.drawPath(mPath, mPaint);
                 } else {
                         mPaint.setShader(mSweepGradient);
                         canvas.drawPath(mPath, mPaint);
@@ -188,7 +193,8 @@ public class SimpleCircleProgress extends View {
 
                 mPaint.setColor(mTextColor);
                 mPaint.setTextSize(mInR * 0.4F);
-                canvas.drawText(String.valueOf(mProgress * 100), mCenterWidth, mCenterHeight + (mInR * mTextMarginTop), mPaint);
+                String text = isIntMode ? Math.round(mProgress) + "%" : mProgress + "%";
+                canvas.drawText(text, mCenterWidth, mCenterHeight + (mInR * mTextMarginTop), mPaint);
                 if (!TextUtils.isEmpty(mText)) {
                         mPaint.setTextSize(mInR * 0.2F);
                         canvas.drawText(mText, mCenterWidth, mCenterHeight + mInR * (0.3F + mTextMarginTop), mPaint);

@@ -13,6 +13,9 @@
         app:scp_progressText="@string/app_name"
         app:scp_startAngle="120"
         app:scp_maxAngle="300"
+        app:scp_progress="58"
+        app:scp_progressWidthPercent="0.5"
+        app:scp_progress_int="true"
         android:layout_weight="1" />
 
     <com.zmp.widget.view.CircleProgressView
